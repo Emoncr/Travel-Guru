@@ -20,6 +20,7 @@ export default withMT({
         'yellow': '#F9A51A',
         'black':'#000'
       },
+
     },
   },
   plugins: [],

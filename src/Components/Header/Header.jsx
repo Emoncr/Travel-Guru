@@ -9,7 +9,7 @@ const Header = () => {
             <img src={logo} alt="logo" />
           </div>
           <nav>
-            <ul className="nav_items flex items-center justify-center">
+            <ul className="nav_items flex items-center  justify-center">
               <li className="nav_item ml-0 ">News</li>
               <li className="nav_item">Destination</li>
               <li className="nav_item">Blog</li>
