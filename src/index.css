@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap");
+.nav_item {
+  @apply font-display text-white font-medium text-base duration-300 py-3 px-4 cursor-pointer ml-4;
+}
+.brand_btn {
+  @apply font-display text-black font-semibold text-base duration-300 py-2 px-4 cursor-pointer
+   bg-yellow rounded;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
