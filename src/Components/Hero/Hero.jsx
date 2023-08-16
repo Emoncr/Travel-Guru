@@ -9,7 +9,11 @@ const Hero = () => {
   const [secoundSlideIndex, setSecoundSlideIndex] = useState(indexCount + 1);
   const [thirdSlideIndex, setThirdSlideIndex] = useState(secoundSlideIndex + 1);
 
+  let slidingTime = 5000;
+
+
   const handlePrevClick = () => {
+    slidingTime = 0;
     const isFirstslide = indexCount === 0;
     const newCountIndex = isFirstslide ? data.length - 1 : indexCount - 1;
     setIndexCount(newCountIndex);
@@ -31,6 +35,7 @@ const Hero = () => {
   };
 
   const handleAfterClick = () => {
+    slidingTime = 0
     const lastSlideNumber = data.length - 1;
     const isLastSlide = indexCount === lastSlideNumber;
     const newSliderIndex = isLastSlide
@@ -53,6 +58,13 @@ const Hero = () => {
     setThirdSlideIndex(newSlideThird);
   };
 
+  const autoPlayItem = (prevFunction)=>{
+    setInterval(() => {
+      prevFunction()
+    }, slidingTime);
+  }
+  // autoPlayItem(handlePrevClick)
+
   return (
     <main className=" 2xl:container overflow-x-hidden 2xl:mr-auto px-4  lg:px-10 lg:mr-0 lg:ml-auto mx-auto pt-28 pb-24  ">
       <div className="content_container ">
@@ -60,7 +72,7 @@ const Hero = () => {
           <div className="col lg:col-span-2 mt-5 lg:mt-0  ">
             <div className="content-container">
               <h1 className="text-6xl text-white">{data[indexCount].name}</h1>
-              <div className="description text-md lg:w-96 text-white mt-4">
+              <div className="description text-md max-w-6xl lg:w-96 text-white mt-4">
                 <p>{data[indexCount].description}</p>
               </div>
               <div className="btn_container">
@@ -72,33 +84,33 @@ const Hero = () => {
           </div>
           <div className="col lg:col-span-3 ">
             <div className="slider_row flex gap-4 ">
-              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5">
+              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 ">
                 <img
-                  className="  mr-auto ml-auto w-64"
+                  className="  mr-auto ml-auto w-64 transition-all"
                   src={data[indexCount].image}
                   alt="image"
                 />
-                <h1 className="text-sm lg:text-xl absolute bottom-2 lg:bottom-7 left-2 lg:left-4 text-white">
+                <p className="text-sm lg:text-xl absolute bottom-2 lg:bottom-7 left-2 lg:left-4 text-white">
                   {data[indexCount].name}
-                </h1>
+                </p>
               </div>
 
               {/* Secound Image of slide  */}
-              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5">
+              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 transition-all">
                 <img
-                  className="  mr-auto ml-auto w-64"
+                  className="  mr-auto ml-auto w-64 transition-all"
                   src={data[thirdSlideIndex].image}
                   alt="image"
                 />
-                <h1 className="text-xs lg:text-xl absolute bottom-4 lg:bottom-7 left-2 lg:left-4 text-white">
+                <p className="text-xs lg:text-xl absolute bottom-4 lg:bottom-7 left-2 lg:left-4 text-white">
                   {data[thirdSlideIndex].name}
-                </h1>
+                </p>
               </div>
 
               {/* thired image of slide  */}
-              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5">
+              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 transition-all">
                 <img
-                  className="  mr-auto ml-auto w-64"
+                  className="  mr-auto ml-auto w-64 "
                   src={data[secoundSlideIndex].image}
                   alt="image"
                 />

@@ -13,7 +13,7 @@ export default withMT({
         'hero-pattern': "url('./src/images/hero_bg.png')",
       },
       fontFamily: {
-      'display': ['Montserrat',],
+      'display': ['KoHo',],
       },
       colors: {
         'white': '#ffffff',

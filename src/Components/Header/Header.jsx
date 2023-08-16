@@ -25,7 +25,7 @@ const Header = () => {
         as="li"
         variant="large"
         color="white"
-        className="p-1 font-normal cursor-pointer"
+        className="p-1 font-normal cursor-pointer font-display"
       >
         News
       </Typography>
@@ -34,7 +34,7 @@ const Header = () => {
         as="li"
         variant="large"
         color="white"
-        className="p-1 font-normal cursor-pointer"
+        className="p-1 font-normal cursor-pointer  font-display"
       >
         Destination
       </Typography>
@@ -42,7 +42,7 @@ const Header = () => {
         as="li"
         variant="large"
         color="white"
-        className="p-1 font-normal cursor-pointer"
+        className="p-1 font-normal cursor-pointer  font-display"
       >
         Blog
       </Typography>
@@ -50,7 +50,7 @@ const Header = () => {
         as="li"
         variant="large"
         color="white"
-        className="p-1 font-normal cursor-pointer"
+        className="p-1 font-normal cursor-pointer font-display"
       >
         Contact
       </Typography>
@@ -66,7 +66,7 @@ const Header = () => {
           color="amber"
           variant="gradient"
           size="md"
-          className="hidden lg:inline-block "
+          className="hidden lg:inline-block font-display"
         >
           <span>Login</span>
         </Button>
@@ -116,7 +116,7 @@ const Header = () => {
             variant="gradient"
             size="sm"
             fullWidth
-            className="mb-2"
+            className="mb-2 font-display"
           >
             <span>Login</span>
           </Button>
