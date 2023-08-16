@@ -18,7 +18,10 @@ export default withMT({
       colors: {
         'white': '#ffffff',
         'yellow': '#F9A51A',
-        'black':'#000'
+        'black':'#000',
+        Amber:{
+          '600' : '#F9A51A'
+        }
       },
 
     },
