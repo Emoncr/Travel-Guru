@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=KoHo:wght@200;300;400;500;600;700&display=swap');
 
-h1,h2,h3,h4,h5,h6,p,li{
+body{
 @apply font-display
 }
 
@@ -11,7 +11,7 @@ h1,h2,h3,h4,h5,h6,p,li{
 
 
 .brand_btn{
-@apply align-middle select-none font-display font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-amber-600 to-amber-400 text-black shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/40 active:opacity-[0.85]   flex items-center justify-center
+@apply align-middle bg-yellow select-none font-display font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-amber-600 to-amber-400 text-black shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/40 active:opacity-[0.85]   flex items-center justify-center
 }
 
 @tailwind base;

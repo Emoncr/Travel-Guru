@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import data from "../../FakeData/fakeData";
-
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconButton } from "@material-tailwind/react";
+import BookingForm from "../Booking Form/BookingForm";
+
 const Hero = () => {
+
   const [indexCount, setIndexCount] = useState(0);
   const [secoundSlideIndex, setSecoundSlideIndex] = useState(indexCount + 1);
   const [thirdSlideIndex, setThirdSlideIndex] = useState(secoundSlideIndex + 1);
 
-  let slidingTime = 5000;
+  const [bookingClicked, SetBookingClicked] = useState(true);
 
+  let slidingTime = 5000;
 
   const handlePrevClick = () => {
     slidingTime = 0;
@@ -35,7 +38,7 @@ const Hero = () => {
   };
 
   const handleAfterClick = () => {
-    slidingTime = 0
+    slidingTime = 0;
     const lastSlideNumber = data.length - 1;
     const isLastSlide = indexCount === lastSlideNumber;
     const newSliderIndex = isLastSlide
@@ -58,15 +61,15 @@ const Hero = () => {
     setThirdSlideIndex(newSlideThird);
   };
 
-  const autoPlayItem = (prevFunction)=>{
+  const autoPlayItem = (prevFunction) => {
     setInterval(() => {
-      prevFunction()
+      prevFunction();
     }, slidingTime);
-  }
+  };
   // autoPlayItem(handlePrevClick)
 
   return (
-    <main className=" 2xl:container overflow-x-hidden 2xl:mr-auto px-4  lg:px-10 lg:mr-0 lg:ml-auto mx-auto pt-28 pb-24  ">
+    <main className="home_container 2xl:container overflow-x-hidden 2xl:mr-auto px-4  lg:px-10 lg:mr-0 lg:ml-auto mx-auto pt-28 pb-24  ">
       <div className="content_container ">
         <div className="row flex flex-col-reverse lg:grid grid-cols-1 lg:grid-cols-5 gap-10 ">
           <div className="col lg:col-span-2 mt-5 lg:mt-0  ">
@@ -76,67 +79,88 @@ const Hero = () => {
                 <p>{data[indexCount].description}</p>
               </div>
               <div className="btn_container">
-                <button className="brand_btn mt-4 ">
-                  Booking <BsArrowRight className="ml-2" />
+                <button
+                  onClick={() => SetBookingClicked(!bookingClicked)}
+                  className="brand_btn mt-4 "
+                >
+                  {bookingClicked ? (
+                    <>
+                      Chose Other <BsArrowRight className="ml-2" />
+                    </>
+                  ) : (
+                    <>
+                      Booking Now <BsArrowRight className="ml-2" />
+                    </>
+                  )}
                 </button>
               </div>
             </div>
           </div>
           <div className="col lg:col-span-3 ">
-            <div className="slider_row flex gap-4 ">
-              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 ">
-                <img
-                  className="  mr-auto ml-auto w-64 transition-all"
-                  src={data[indexCount].image}
-                  alt="image"
-                />
-                <p className="text-sm lg:text-xl absolute bottom-2 lg:bottom-7 left-2 lg:left-4 text-white">
-                  {data[indexCount].name}
-                </p>
-              </div>
+            {bookingClicked ? (
+              <BookingForm destinationData = {{data,indexCount}}/>
+            ) : (
+              <>
+                <div className="slider_row flex gap-4 ">
+                  <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 ">
+                    <img
+                      className="  mr-auto ml-auto w-64 transition-all"
+                      src={data[indexCount].image}
+                      alt="image"
+                    />
+                    <p className="text-sm lg:text-xl absolute bottom-2 lg:bottom-7 left-2 lg:left-4 text-white">
+                      {data[indexCount].name}
+                    </p>
+                  </div>
 
-              {/* Secound Image of slide  */}
-              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 transition-all">
-                <img
-                  className="  mr-auto ml-auto w-64 transition-all"
-                  src={data[thirdSlideIndex].image}
-                  alt="image"
-                />
-                <p className="text-xs lg:text-xl absolute bottom-4 lg:bottom-7 left-2 lg:left-4 text-white">
-                  {data[thirdSlideIndex].name}
-                </p>
-              </div>
+                  {/* Secound Image of slide  */}
+                  <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 transition-all">
+                    <img
+                      className="  mr-auto ml-auto w-64 transition-all"
+                      src={data[thirdSlideIndex].image}
+                      alt="image"
+                    />
+                    <p className="text-xs lg:text-xl absolute bottom-4 lg:bottom-7 left-2 lg:left-4 text-white">
+                      {data[thirdSlideIndex].name}
+                    </p>
+                  </div>
 
-              {/* thired image of slide  */}
-              <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 transition-all">
-                <img
-                  className="  mr-auto ml-auto w-64 "
-                  src={data[secoundSlideIndex].image}
-                  alt="image"
-                />
-                <p className="text-xs lg:text-xl absolute bottom-4 lg:bottom-7 left-2 lg:left-4 text-white">
-                  {data[secoundSlideIndex].name}
-                </p>
-              </div>
-            </div>
+                  {/* thired image of slide  */}
+                  <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 transition-all">
+                    <img
+                      className="  mr-auto ml-auto w-64 "
+                      src={data[secoundSlideIndex].image}
+                      alt="image"
+                    />
+                    <p className="text-xs lg:text-xl absolute bottom-4 lg:bottom-7 left-2 lg:left-4 text-white">
+                      {data[secoundSlideIndex].name}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
-        <div className="btn-container flex justify-between items-center w-28 lg:w-36 mx-auto mt-10 lg:mt-20">
-          <IconButton
-            color="amber"
-            onClick={handlePrevClick}
-            className="prev_btn  rounded-full text-xl text-black"
-          >
-            <FaAngleLeft />
-          </IconButton>
-          <IconButton
-            color="amber"
-            onClick={handleAfterClick}
-            className="after_btn  rounded-full text-xl text-black"
-          >
-            <FaAngleRight />
-          </IconButton>
-        </div>
+        {bookingClicked ? (
+          ""
+        ) : (
+          <div className="btn-container flex justify-between items-center w-28 lg:w-36 mx-auto mt-10 lg:mt-20">
+            <IconButton
+              color="amber"
+              onClick={handlePrevClick}
+              className="prev_btn  rounded-full text-xl text-black"
+            >
+              <FaAngleLeft />
+            </IconButton>
+            <IconButton
+              color="amber"
+              onClick={handleAfterClick}
+              className="after_btn  rounded-full text-xl text-black"
+            >
+              <FaAngleRight />
+            </IconButton>
+          </div>
+        )}
       </div>
     </main>
   );
