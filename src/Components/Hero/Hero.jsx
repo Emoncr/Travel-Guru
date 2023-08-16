@@ -6,9 +6,9 @@ import { BsArrowRight } from "react-icons/bs";
 
 const Hero = () => {
   return (
-    <main className=" container overflow-x-hidden lg:mr-auto lg:ml-auto mx-auto pt-32 pb-24 ">
+    <main className=" container overflow-x-hidden lg:mr-auto lg:ml-auto mx-auto pt-32 pb-24 px-6 ">
       <div className="content_container">
-        <div className="row grid grid-cols-2 lg:grid-cols-5 gap-4 ">
+        <div className="row grid grid-cols-1 lg:grid-cols-5 gap-4 ">
           <div className="col lg:col-span-2  ">
             <div className="content-container">
               <h1 className="text-6xl text-white">Cox's Bazaar</h1>
