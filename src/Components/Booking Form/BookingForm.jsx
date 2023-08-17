@@ -1,23 +1,26 @@
-import React from "react";
-import {useForm} from "react-hook-form";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import BookingContext from "../../Contexts/BookingContext";
 
 const BookingForm = ({ destinationData }) => {
+  const Mdata   = useContext(BookingContext);
+console.log(Mdata);
   const { data, indexCount } = destinationData;
-
   const { register, handleSubmit } = useForm();
 
-  const handleBooking=(data)=>{
-console.log(data);
-  }
+  const handleBooking = (data) => {
+    // addBookingData(data);
+  };
 
   return (
     <>
       <div className="form_container">
         <div className="flex justify-center">
           <div className="w-full max-w-md">
-            <form 
-            onSubmit={handleSubmit(handleBooking)}
-            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
+            <form
+              onSubmit={handleSubmit(handleBooking)}
+              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 "
+            >
               <div className="mb-4">
                 <label
                   className="block text-gray text-sm font-medium mb-2"

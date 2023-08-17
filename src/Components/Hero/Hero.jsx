@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import data from "../../FakeData/fakeData";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { BsArrowRight } from "react-icons/bs";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconButton } from "@material-tailwind/react";
 import BookingForm from "../Booking Form/BookingForm";
 
+
 const Hero = () => {
+
+
 
   const [indexCount, setIndexCount] = useState(0);
   const [secoundSlideIndex, setSecoundSlideIndex] = useState(indexCount + 1);
   const [thirdSlideIndex, setThirdSlideIndex] = useState(secoundSlideIndex + 1);
 
-  const [bookingClicked, SetBookingClicked] = useState(true);
+  const [bookingClicked, SetBookingClicked] = useState(false);
 
   let slidingTime = 5000;
 
