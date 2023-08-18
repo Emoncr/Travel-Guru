@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import BookingContext from "../../Contexts/BookingContext";
+import { bookingContext } from "../../Contexts/BookingContext";
 
 const BookingForm = ({ destinationData }) => {
-  const Mdata   = useContext(BookingContext);
-console.log(Mdata);
+  const { addBookingData } = useContext(bookingContext);
   const { data, indexCount } = destinationData;
   const { register, handleSubmit } = useForm();
 
   const handleBooking = (data) => {
-    // addBookingData(data);
+    addBookingData(data);
   };
 
   return (

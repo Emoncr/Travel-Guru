@@ -1,12 +1,12 @@
 export const bookingState = {
-  bookingData: [],
+  bookingData: {},
 };
 
 export const bookingReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_BOOKING_DATA':
-        const {bookingData}=action.payload;
-        console.log(bookingData);
+    case "ADD_BOOKING_DATA":
+      const { bookingInfo } = action.payload;
+      return { ...state, bookingData: bookingInfo };
 
     default:
       return state;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   MobileNav,
@@ -8,9 +8,20 @@ import {
 } from "@material-tailwind/react";
 
 import logo from "../../images/Group 1330.png";
+import logoBlack from "../../images/logo.png";
+import { Link, useLocation, useParams, useRoutes } from "react-router-dom";
 
 const Header = () => {
   const [openNav, setOpenNav] = React.useState(false);
+  const [isRouteChange, setRouteChange] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname != "/") {
+      setRouteChange(!isRouteChange);
+    }
+  }, pathname);
+
 
   React.useEffect(() => {
     window.addEventListener(
@@ -20,11 +31,14 @@ const Header = () => {
   }, []);
 
   const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul
+      className={`mb-4 mt-2 flex flex-col  ${
+        isRouteChange ? "text-black" : "text-white"
+      } gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 `}
+    >
       <Typography
         as="li"
         variant="large"
-        color="white"
         className="p-1 font-normal cursor-pointer font-display"
       >
         News
@@ -33,7 +47,6 @@ const Header = () => {
       <Typography
         as="li"
         variant="large"
-        color="white"
         className="p-1 font-normal cursor-pointer  font-display"
       >
         Destination
@@ -41,7 +54,6 @@ const Header = () => {
       <Typography
         as="li"
         variant="large"
-        color="white"
         className="p-1 font-normal cursor-pointer  font-display"
       >
         Blog
@@ -49,7 +61,6 @@ const Header = () => {
       <Typography
         as="li"
         variant="large"
-        color="white"
         className="p-1 font-normal cursor-pointer font-display"
       >
         Contact
@@ -58,18 +69,25 @@ const Header = () => {
   );
 
   return (
-    <Navbar className="2xl:container lg:max-w-full lg:px-10 !backdrop-blur-0 mx-auto max-w-screen-xl py-2 px-4  lg:py-4 bg-transparent rounded-none border-none  shadow-none">
-      <div className="container mx-auto flex items-center justify-between text-white-900">
-        <img src={logo} alt="logo" />
+    <Navbar className="2xl:container lg:max-w-full lg:px-10 !backdrop-blur-0 mx-auto max-w-screen-xl py-2 px-4  lg:py-4 bg-transparent rounded-none border-none  shadow-none ">
+      <div className="containe mx-auto flex items-center justify-between text-white-900">
+        <Link to={"/"}>
+          {
+            isRouteChange?<img className="w-32" src={logoBlack} alt="logo" /> :<img className="w-32" src={logo} alt="logo" />
+          }
+        </Link>
         <div className="hidden lg:block">{navList}</div>
-        <Button
-          color="amber"
-          variant="gradient"
-          size="md"
-          className="hidden lg:inline-block font-display"
-        >
-          <span>Login</span>
-        </Button>
+        <Link to={"/login"}>
+          <Button
+            color="amber"
+            variant="gradient"
+            size="md"
+            className="hidden lg:inline-block font-display"
+          >
+            <span>Login</span>
+          </Button>
+        </Link>
+
         <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"

@@ -1,23 +1,23 @@
 import React, { createContext, useReducer } from "react";
 import { bookingReducer, bookingState } from "../Reducers/bookingReducer";
 
-export const bookingContex = createContext();
+export const bookingContext = createContext();
+
 const BookingContext = ({ children }) => {
   const [state, dispatch] = useReducer(bookingReducer, bookingState);
 
-  const addBookingData = (bookingData) => {
+  const addBookingData = (bookingInfo) => {
     dispatch({
       type: "ADD_BOOKING_DATA",
-      payload: bookingData,
+      payload: { bookingInfo },
     });
   };
 
 
-  // console.log(state);
   return (
-    <bookingContex.Provider value={state }>
+    <bookingContext.Provider value={{ state, addBookingData }}>
       {children}
-    </bookingContex.Provider>
+    </bookingContext.Provider>
   );
 };
 
