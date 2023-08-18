@@ -5,11 +5,7 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IconButton } from "@material-tailwind/react";
 import BookingForm from "../Booking Form/BookingForm";
 
-
 const Hero = () => {
-
-
-
   const [indexCount, setIndexCount] = useState(0);
   const [secoundSlideIndex, setSecoundSlideIndex] = useState(indexCount + 1);
   const [thirdSlideIndex, setThirdSlideIndex] = useState(secoundSlideIndex + 1);
@@ -72,13 +68,15 @@ const Hero = () => {
   // autoPlayItem(handlePrevClick)
 
   return (
-    <main className="home_container 2xl:container overflow-x-hidden 2xl:mr-auto px-4  lg:px-10 lg:mr-0 lg:ml-auto mx-auto pt-28 pb-24  ">
+    <main className="home_container 2xl:container overflow-x-hidden 2xl:mr-auto px-4  lg:px-10 lg:mr-0 lg:ml-auto mx-auto pt-10 sm:pt-28 pb-24  ">
       <div className="content_container ">
         <div className="row flex flex-col-reverse lg:grid grid-cols-1 lg:grid-cols-5 gap-10 ">
-          <div className="col lg:col-span-2 mt-5 lg:mt-0  ">
+          <div className="col lg:col-span-2 sm:mt-5 lg:mt-0  ">
             <div className="content-container">
-              <h1 className="text-6xl text-white">{data[indexCount].name}</h1>
-              <div className="description text-md max-w-6xl lg:w-96 text-white mt-4">
+              <h1 className="sm:text-6xl text-5xl  text-white">
+                {data[indexCount].name}
+              </h1>
+              <div className="description text-sm sm:text-md max-w-6xl lg:w-96 text-white mt-4">
                 <p>{data[indexCount].description}</p>
               </div>
               <div className="btn_container">
@@ -101,29 +99,29 @@ const Hero = () => {
           </div>
           <div className="col lg:col-span-3 ">
             {bookingClicked ? (
-              <BookingForm destinationData = {{data,indexCount}}/>
+              <BookingForm destinationData={{ data, indexCount }} />
             ) : (
               <>
                 <div className="slider_row flex gap-4 ">
-                  <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 ">
+                  <div className="image-container relative  rounded-[10px] sm:first:rounded-2xl sm:first:border-4 border-2 first:border-yellow first:scale-110 first:mr-5 ">
                     <img
                       className="  mr-auto ml-auto w-64 transition-all"
                       src={data[indexCount].image}
                       alt="image"
                     />
-                    <p className="text-sm lg:text-xl absolute bottom-2 lg:bottom-7 left-2 lg:left-4 text-white">
+                    <p className="text-[10px] sm:text-xl absolute bottom-2 lg:bottom-7 left-2 lg:left-4 text-white">
                       {data[indexCount].name}
                     </p>
                   </div>
 
                   {/* Secound Image of slide  */}
-                  <div className="image-container relative  first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 transition-all">
+                  <div className="image-container relative   first:rounded-2xl first:border-4 first:border-yellow first:scale-110 first:mr-5 transition-all">
                     <img
                       className="  mr-auto ml-auto w-64 transition-all"
                       src={data[thirdSlideIndex].image}
                       alt="image"
                     />
-                    <p className="text-xs lg:text-xl absolute bottom-4 lg:bottom-7 left-2 lg:left-4 text-white">
+                    <p className="text-[10px] sm:text-xl absolute bottom-2 lg:bottom-7 left-2 lg:left-4 text-white">
                       {data[thirdSlideIndex].name}
                     </p>
                   </div>
@@ -135,7 +133,7 @@ const Hero = () => {
                       src={data[secoundSlideIndex].image}
                       alt="image"
                     />
-                    <p className="text-xs lg:text-xl absolute bottom-4 lg:bottom-7 left-2 lg:left-4 text-white">
+                    <p className="text-[10px] sm:text-xl absolute bottom-2 lg:bottom-7 left-2 lg:left-4 text-white">
                       {data[secoundSlideIndex].name}
                     </p>
                   </div>

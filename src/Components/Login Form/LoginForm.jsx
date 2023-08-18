@@ -1,19 +1,63 @@
 import React from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleUserLogin = (data) => {
+    const { email, password } = data;
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
+
   return (
     <div className="login_form_container">
-      <form action="">
+      <form onSubmit={handleSubmit(handleUserLogin)}>
         <input
-          className="login_input mt-10"
-          type="email"
-          placeholder="Username or Email"
+          {...register("email", {
+            required: "This is required",
+            pattern: {
+              value:
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              message: "Email is not vaild",
+            },
+          })}
+          className="login_input mt-5"
+          type="text"
+          placeholder="Email"
         />
+        {errors.email && (
+          <p className="text-red-900 text-xs font-bold">
+            {errors.email.message}
+          </p>
+        )}
+
         <input
+          {...register("password", { required: "This is required" })}
           className="login_input mt-5"
           type="password"
           placeholder="Passowrd"
         />
+        {errors.password && (
+          <p className="text-red-900 text-xs font-bold">
+            {errors.password.message}
+          </p>
+        )}
         <div className="remaind_me mt-5">
           <div class="flex justify-between items-center ">
             <div className="flex  items-center ">

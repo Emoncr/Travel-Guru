@@ -9,7 +9,7 @@ import {
 
 import logo from "../../images/Group 1330.png";
 import logoBlack from "../../images/logo.png";
-import { Link, useLocation, useParams, useRoutes } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 
 const Header = () => {
   const [openNav, setOpenNav] = React.useState(false);
@@ -21,7 +21,6 @@ const Header = () => {
       setRouteChange(!isRouteChange);
     }
   }, pathname);
-
 
   React.useEffect(() => {
     window.addEventListener(
@@ -36,13 +35,15 @@ const Header = () => {
         isRouteChange ? "text-black" : "text-white"
       } gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 `}
     >
-      <Typography
-        as="li"
-        variant="large"
-        className="p-1 font-normal cursor-pointer font-display"
-      >
-        News
-      </Typography>
+      <Link to={'/'}>
+        <Typography
+          as="li"
+          variant="large"
+          className="p-1 font-normal cursor-pointer font-display"
+        >
+          Home
+        </Typography>
+      </Link>
 
       <Typography
         as="li"
@@ -72,9 +73,11 @@ const Header = () => {
     <Navbar className="2xl:container lg:max-w-full lg:px-10 !backdrop-blur-0 mx-auto max-w-screen-xl py-2 px-4  lg:py-4 bg-transparent rounded-none border-none  shadow-none ">
       <div className="containe mx-auto flex items-center justify-between text-white-900">
         <Link to={"/"}>
-          {
-            isRouteChange?<img className="w-32" src={logoBlack} alt="logo" /> :<img className="w-32" src={logo} alt="logo" />
-          }
+          {isRouteChange ? (
+            <img className="w-20 lg:32" src={logoBlack} alt="logo" />
+          ) : (
+            <img className="w-20 lg:32" src={logo} alt="logo" />
+          )}
         </Link>
         <div className="hidden lg:block">{navList}</div>
         <Link to={"/login"}>
@@ -90,7 +93,9 @@ const Header = () => {
 
         <IconButton
           variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+          className={`ml-auto h-6 w-6   text-inherit ${
+            isRouteChange ? "text-yellow" : ""
+          }  hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden`}
           ripple={false}
           onClick={() => setOpenNav(!openNav)}
         >
@@ -129,15 +134,17 @@ const Header = () => {
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
-          <Button
-            color="amber"
-            variant="gradient"
-            size="sm"
-            fullWidth
-            className="mb-2 font-display"
-          >
-            <span>Login</span>
-          </Button>
+          <Link to={"/login"}>
+            <Button
+              color="amber"
+              variant="gradient"
+              size="sm"
+              fullWidth
+              className="mb-2 font-display"
+            >
+              <span>Login</span>
+            </Button>
+          </Link>
         </div>
       </MobileNav>
     </Navbar>
