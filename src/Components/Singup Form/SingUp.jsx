@@ -6,7 +6,15 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-const SingUp = () => {
+const SingUp = ({ setNewUserData }) => {
+  const {
+    setNewUser,
+    isNewUser,
+    checkError,
+    setCheckError,
+    deleteNotifyMsg,
+  } = setNewUserData;
+
   const {
     register,
     handleSubmit,
@@ -23,11 +31,22 @@ const SingUp = () => {
         const user = userCredential.user;
         const fullName = first_name + " " + last_name;
         updateProfile(user, { displayName: fullName });
-        console.log(user);
+        setCheckError({
+          ...checkError,
+          isSuccess: true,
+          successText: "Sign Up SuccessFull, Go For Login",
+        });
+        setNewUser(!isNewUser);
+        deleteNotifyMsg();
       })
       .catch((error) => {
         const errorMessage = error.message;
-        console.log(errorMessage);
+        deleteNotifyMsg();
+        setCheckError({
+          ...checkError,
+          isError: true,
+          errorText: errorMessage,
+        });
       });
   };
 

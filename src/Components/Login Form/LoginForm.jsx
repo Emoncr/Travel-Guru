@@ -1,8 +1,22 @@
 import React from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { userLoginContext } from "../../Contexts/UserContext";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const LoginForm = ({ setErrors }) => {
+  const { checkError, setCheckError, deleteNotifyMsg } = setErrors;
+
+  const { addLoginUser } = useContext(userLoginContext);
+  const location = useLocation();
+
+
+  const navigate = useNavigate();
+
+
+
   const {
     register,
     handleSubmit,
@@ -14,14 +28,25 @@ const LoginForm = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
+        // Signed in success
         const user = userCredential.user;
-        console.log(user);
+
+        addLoginUser(user);
+        setCheckError({
+          ...checkError,
+          isSuccess: true,
+          successText: "Login SuccessFull",
+        });
+        deleteNotifyMsg();
+        location.state&& navigate(location.state.from)
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
+        setCheckError({
+          ...checkError,
+          isError: true,
+          errorText: error.message,
+        });
+        deleteNotifyMsg();
       });
   };
 
@@ -29,6 +54,7 @@ const LoginForm = () => {
     <div className="login_form_container">
       <form onSubmit={handleSubmit(handleUserLogin)}>
         <input
+          onFocus={() => setCheckError({ ...checkError, isError: false })}
           {...register("email", {
             required: "This is required",
             pattern: {
@@ -48,6 +74,7 @@ const LoginForm = () => {
         )}
 
         <input
+          onFocus={() => setCheckError({ ...checkError, isError: false })}
           {...register("password", { required: "This is required" })}
           className="login_input mt-5"
           type="password"
@@ -59,17 +86,14 @@ const LoginForm = () => {
           </p>
         )}
         <div className="remaind_me mt-5">
-          <div class="flex justify-between items-center ">
-            <div className="flex  items-center ">
-              <input
-                id="remind-me"
-                type="checkbox"
-                class="w-4 h-4 text-yellow bg-gray-100 border-gray-300 focus:ring-yellow  checked:!bg-yellow "
-              />
-              <label
-                for="remind-me"
-                class="ml-2 sm:text-sm text-[12px] font-medium text-black capitalize dark:text-gray-300"
-              >
+          <div className="flex justify-between items-center ">
+            <div className="flex   items-center ">
+              <label className="ml-2 flex   items-center sm:text-sm text-[12px] font-medium text-black capitalize dark:text-gray-300">
+                <input
+                  id="remind-me"
+                  type="checkbox"
+                  className="w-4 h-4 text-yellow bg-gray-100 border-gray-300 focus:ring-yellow  checked:!bg-yellow mr-1"
+                />
                 remind me
               </label>
             </div>

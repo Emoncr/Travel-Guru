@@ -5,11 +5,12 @@ import {
   Typography,
   Button,
   IconButton,
+  Collapse ,
 } from "@material-tailwind/react";
 
 import logo from "../../images/Group 1330.png";
 import logoBlack from "../../images/logo.png";
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [openNav, setOpenNav] = React.useState(false);
@@ -20,7 +21,7 @@ const Header = () => {
     if (pathname != "/") {
       setRouteChange(!isRouteChange);
     }
-  }, pathname);
+  }, [pathname]);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -35,10 +36,10 @@ const Header = () => {
         isRouteChange ? "text-black" : "text-white"
       } gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 `}
     >
-      <Link to={'/'}>
+      <Link to={"/"}>
         <Typography
           as="li"
-          variant="large"
+          variant="paragraph"
           className="p-1 font-normal cursor-pointer font-display"
         >
           Home
@@ -47,21 +48,21 @@ const Header = () => {
 
       <Typography
         as="li"
-        variant="large"
+        variant="paragraph"
         className="p-1 font-normal cursor-pointer  font-display"
       >
         Destination
       </Typography>
       <Typography
         as="li"
-        variant="large"
+        variant="paragraph"
         className="p-1 font-normal cursor-pointer  font-display"
       >
         Blog
       </Typography>
       <Typography
         as="li"
-        variant="large"
+        variant="paragraph"
         className="p-1 font-normal cursor-pointer font-display"
       >
         Contact
@@ -131,7 +132,7 @@ const Header = () => {
           )}
         </IconButton>
       </div>
-      <MobileNav open={openNav}>
+      <Collapse open={openNav}>
         <div className="container mx-auto">
           {navList}
           <Link to={"/login"}>
@@ -146,7 +147,7 @@ const Header = () => {
             </Button>
           </Link>
         </div>
-      </MobileNav>
+      </Collapse>
     </Navbar>
   );
 };

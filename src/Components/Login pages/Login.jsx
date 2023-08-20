@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Header from "../Header/Header";
 import or from "../../images/or.png";
 import fb from "../../images/fb.png";
@@ -8,36 +8,64 @@ import SingUp from "../Singup Form/SingUp";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../FireBase Config/FirebaseConfig";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { userLoginContext } from "../../Contexts/UserContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const Login = () => {
   const [isNewUser, setNewUser] = useState(false);
+  const [checkError, setCheckError] = useState({
+    isError: false,
+    isSuccess: false,
+    successText: "",
+    errorText: "",
+  });
 
-  const GoogleProvider = new GoogleAuthProvider();
+  const { addLoginUser } = useContext(userLoginContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleGoogleSingIn = () => {
+    const GoogleProvider = new GoogleAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, GoogleProvider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        // The signed-in user info.
         const user = result.user;
-
-        console.log(user);
+        addLoginUser(user);
+        setCheckError({
+          ...checkError,
+          isSuccess: true,
+          successText: "Resister Successfull",
+        });
+        deleteNotifyMsg();
+        location.state && navigate(location.state.from);
       })
       .catch((error) => {
-        // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
         const email = error.customData.email;
-        // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        console.log(errorMessage);
+        setCheckError({
+          ...checkError,
+          isError: true,
+          errorText: errorMessage,
+        });
+        deleteNotifyMsg();
       });
+  };
+
+  const deleteNotifyMsg = () => {
+    setTimeout(() => {
+      setCheckError({
+        ...checkError,
+        isError: false,
+        isSuccess: false,
+      });
+    }, 3000);
   };
 
   return (
@@ -55,7 +83,31 @@ const Login = () => {
               </p>
 
               <div className="form_container">
-                {isNewUser ? <SingUp /> : <LoginForm />}
+                {isNewUser ? (
+                  <SingUp
+                    setNewUserData={{
+                      isNewUser,
+                      setNewUser,
+                      checkError,
+                      setCheckError,
+                      deleteNotifyMsg,
+                    }}
+                  />
+                ) : (
+                  <LoginForm
+                    setErrors={{ checkError, setCheckError, deleteNotifyMsg }}
+                  />
+                )}
+                {checkError.isError && (
+                  <p className="text-red-900 duration-300 scale-up-top mt-2 text-center capitalize text-xs font-bold">
+                    {checkError.errorText}
+                  </p>
+                )}
+                {checkError.isSuccess && (
+                  <p className="text-green-900 duration-300 scale-up-top mt-2 text-center capitalize text-xs font-bold">
+                    {checkError.successText}
+                  </p>
+                )}
                 <p className="text-center sm:text-sm mt-4 text-[12px]  text-black font-medium">
                   {isNewUser
                     ? "Already have an account?"
@@ -79,7 +131,7 @@ const Login = () => {
               <div className="google_login_btn">
                 <button
                   onClick={handleGoogleSingIn}
-                  class="flex justify-center items-center w-full bg-white border border-gray-300 rounded-0  max-w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 duration-50 focus:outline-none focus:ring-2 active:bg-white
+                  className="flex justify-center items-center w-full bg-white border border-gray-300 rounded-0  max-w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 duration-50 focus:outline-none focus:ring-2 active:bg-white
               focus:ring-yellow"
                 >
                   <img src={google} alt="google" className="mr-2 w-8" />
@@ -87,7 +139,7 @@ const Login = () => {
                 </button>
               </div>
               <div className="fb_login_btn mt-2">
-                <button class="flex justify-center items-center w-full bg-white border border-gray-300 rounded-0  max-w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 duration-50 focus:outline-none focus:ring-2 focus:ring-yellow active:bg-white ">
+                <button className="flex justify-center items-center w-full bg-white border border-gray-300 rounded-0  max-w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 duration-50 focus:outline-none focus:ring-2 focus:ring-yellow active:bg-white ">
                   <img src={fb} alt="google" className="mr-2 " />
                   <span>Continue with Facebook</span>
                 </button>

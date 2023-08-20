@@ -1,23 +1,38 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=KoHo:wght@200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=KoHo:wght@200;300;400;500;600;700&display=swap");
 
-body{
-@apply font-display
+body {
+  @apply font-display;
 }
 
 .nav_item {
   @apply font-display text-white font-medium text-base duration-300 py-3 px-4 cursor-pointer ml-4;
 }
 
-
-.brand_btn{
-@apply align-middle bg-yellow select-none font-display font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-amber-600 to-amber-400 text-black shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/40 active:opacity-[0.85]   flex items-center justify-center
+.brand_btn {
+  @apply align-middle bg-yellow select-none font-display font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-amber-600 to-amber-400 text-black shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/40 active:opacity-[0.85]   flex items-center justify-center;
 }
-.login_input{
-@apply w-full py-1 px-2 border-b-[1px] border-b-[#C5C5C5]  placeholder:text-[#adadad] focus:border-b-[#F9A51A] focus:outline-none font-medium
+.login_input {
+  @apply w-full py-1 px-2 border-b-[1px] border-b-[#C5C5C5]  placeholder:text-[#adadad] focus:border-b-[#F9A51A] focus:outline-none font-medium;
 }
-
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.login_container {
+  box-shadow: 0px 2px 5px #ffb300;
+}
+.scale-up-top {
+  animation: scale-up-top 0.4s;
+}
+@keyframes scale-up-top {
+  0% {
+    transform: scale(0.5);
+    transform-origin: center top;
+  }
+  100% {
+    transform: scale(1);
+    transform-origin: center top;
+  }
+}
