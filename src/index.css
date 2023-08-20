@@ -36,3 +36,10 @@ body {
     transform-origin: center top;
   }
 }
+.stroked_text{
+  -webkit-text-stroke: 0.5px black;
+  text-stroke: .5px black;
+}
+.inner_room_container{
+box-shadow: 2px 2px 30px #cfcfcf !important; 
+}

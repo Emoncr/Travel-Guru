@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { bookingContext } from "../../Contexts/BookingContext";
+
 import { useNavigate, useNavigation } from "react-router-dom";
+import { bookingContext } from "../../Contexts/BookingContext";
 
 const BookingForm = ({ destinationData }) => {
   const { addBookingData } = useContext(bookingContext);
@@ -10,11 +11,11 @@ const BookingForm = ({ destinationData }) => {
   console.log(data);
   const productPage = data[indexCount].category;
   console.log(productPage);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleBooking = (data) => {
     addBookingData(data);
-    navigate(`/destination/${productPage}`)
+    navigate(`/destination/${productPage}`);
   };
 
   return (
@@ -39,10 +40,7 @@ const BookingForm = ({ destinationData }) => {
                 </label>
               </div>
               <div className="mb-6">
-                <label
-                  className="block text-gray text-sm font-medium mb-2"
-
-                >
+                <label className="block text-gray text-sm font-medium mb-2">
                   Destination
                   <input
                     className="mt-1  shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"

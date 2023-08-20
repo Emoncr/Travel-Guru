@@ -1,5 +1,5 @@
 export const loginUserState = {
-  user: {},
+  user: {email:  "biplobemon5210@gmail.com"},
 };
 
 export const loignUserReducer = (state, action) => {

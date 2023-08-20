@@ -22,7 +22,7 @@ const Login = () => {
     errorText: "",
   });
 
-  const { addLoginUser } = useContext(userLoginContext);
+  const { addLoginUser, state } = useContext(userLoginContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -67,6 +67,8 @@ const Login = () => {
       });
     }, 3000);
   };
+
+
 
   return (
     <>

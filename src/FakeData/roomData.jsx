@@ -1,0 +1,148 @@
+import room1 from "../images/Room 1.png";
+import room2 from "../images/Room 2.png";
+import room3 from "../images/Room 3.png";
+
+const rooms = [
+  {
+    room_id: "12345",
+    room_number: "101",
+    room_type: "Standard",
+    occupancy: 2,
+    beds: 1,
+    price_per_night: 150.0,
+    available: true,
+    amenities: ["TV", "WiFi", "Air conditioning"],
+    image: room1,
+    room_name: "Standard Room",
+    rating: 4.9,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "67890",
+    room_number: "202",
+    room_type: "Deluxe",
+    occupancy: 3,
+    beds: 2,
+    price_per_night: 250.0,
+    available: false,
+    amenities: ["TV", "WiFi", "Mini bar", "Balcony"],
+    image: room2,
+    room_name: "Deluxe Suite",
+    rating: 4.5,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "54321",
+    room_number: "303",
+    room_type: "Suite",
+    occupancy: 4,
+    beds: 2,
+    price_per_night: 450.0,
+    available: true,
+    amenities: ["TV", "WiFi", "Jacuzzi", "Kitchenette", "Ocean view"],
+    image: room3,
+    room_name: "Ocean-View Suite",
+    rating: 4.7,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "98765",
+    room_number: "404",
+    room_type: "Standard",
+    occupancy: 2,
+    beds: 1,
+    price_per_night: 120.0,
+    available: true,
+    amenities: ["TV", "WiFi", "Air conditioning"],
+    image: room1,
+    room_name: "Cozy Retreat",
+    rating: 4.9,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "45678",
+    room_number: "505",
+    room_type: "Deluxe",
+    occupancy: 3,
+    beds: 2,
+    price_per_night: 280.0,
+    available: true,
+    amenities: ["TV", "WiFi", "Mini bar", "Balcony"],
+    image: room2,
+    room_name: "Elegant Getaway",
+    rating: 4.3,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "23456",
+    room_number: "606",
+    room_type: "Suite",
+    occupancy: 4,
+    beds: 2,
+    price_per_night: 500.0,
+    available: false,
+    amenities: ["TV", "WiFi", "Jacuzzi", "Kitchenette", "Mountain view"],
+    image: room3,
+    room_name: "Mountain-View Suite",
+    rating: 4.8,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "13579",
+    room_number: "707",
+    room_type: "Standard",
+    occupancy: 2,
+    beds: 1,
+    price_per_night: 130.0,
+    available: true,
+    amenities: ["TV", "WiFi", "Air conditioning"],
+    image: room1,
+    room_name: "Classic Room",
+    rating: 4.2,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "24680",
+    room_number: "808",
+    room_type: "Deluxe",
+    occupancy: 3,
+    beds: 2,
+    price_per_night: 270.0,
+    available: true,
+    amenities: ["TV", "WiFi", "Mini bar", "Balcony"],
+    image: room2,
+    room_name: "Luxury Deluxe Room",
+    rating: 4.9,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "98765",
+    room_number: "909",
+    room_type: "Suite",
+    occupancy: 4,
+    beds: 2,
+    price_per_night: 550.0,
+    available: false,
+    amenities: ["TV", "WiFi", "Jacuzzi", "Kitchenette", "City View"],
+    image: room3,
+    room_name: "Cityscape Suite",
+    rating: 4.5,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+  {
+    room_id: "11223",
+    room_number: "1010",
+    room_type: "Standard",
+    occupancy: 2,
+    beds: 1,
+    price_per_night: 125.0,
+    available: true,
+    amenities: ["TV", "WiFi", "Air conditioning"],
+    image: room1,
+    room_name: "Economy Room",
+    rating: 4.6,
+    cancel_type:'Cancellation fexibility availiable'
+  },
+];
+
+export default rooms;
