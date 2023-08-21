@@ -12,7 +12,6 @@ const Room = ({ room }) => {
     amenities,
     available,
     beds,
-    cancel_type,
     rating,
     price_per_night,
   } = room;
@@ -32,7 +31,7 @@ const Room = ({ room }) => {
             </p>
             <div className="feature_container  grid grid-cols-2">
               {amenities.map((offer) => (
-                <p className="ml-1 mt-1 font-semibold text-xs text-[#6A6A6A] flex items-center">
+                <p key={offer} className="ml-1 mt-1 font-semibold text-xs text-[#6A6A6A] flex items-center">
                  <FaCheck className="text-green-800 text-[12px] mr-1"/> {offer},
                 </p>
               ))}

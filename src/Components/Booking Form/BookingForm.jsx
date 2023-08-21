@@ -1,16 +1,20 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { bookingContext } from "../../Contexts/BookingContext";
 
 const BookingForm = ({ destinationData }) => {
   const { addBookingData } = useContext(bookingContext);
   const { data, indexCount } = destinationData;
-  const { register, handleSubmit } = useForm();
-  console.log(data);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm();
+
   const productPage = data[indexCount].category;
-  console.log(productPage);
+  console.log(errors);
   const navigate = useNavigate();
 
   const handleBooking = (data) => {
@@ -34,12 +38,17 @@ const BookingForm = ({ destinationData }) => {
                     className="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-black font-medium leading-tight focus:outline-none focus:shadow-outline"
                     id="origin"
                     type="text"
-                    {...register("origin")}
+                    {...register("origin", { required: "This is require" })}
                     placeholder="Origin"
                   />
+                  {errors.origin && (
+                    <p className="text-red-900 text-sm mt-1 ml-1">
+                      {errors.origin.message}
+                    </p>
+                  )}
                 </label>
               </div>
-              <div className="mb-6">
+              <div className="mb-4 sm:mb-6">
                 <label className="block text-gray text-sm font-medium mb-2">
                   Destination
                   <input
@@ -48,13 +57,13 @@ const BookingForm = ({ destinationData }) => {
                     type="text"
                     placeholder="Destination"
                     {...register("destination")}
-                    defaultValue={data[indexCount].name}
+                    value={data[indexCount].name}
                   />
                 </label>
               </div>
 
-              <div className="date_container flex justify-between">
-                <div className="mb-6">
+              <div className="date_container flex justify-between sm:flex-row flex-col">
+                <div className=" mb-4 sm:mb-6">
                   <label className="block text-gray text-sm font-medium mb-2">
                     From,
                     <input
@@ -62,11 +71,18 @@ const BookingForm = ({ destinationData }) => {
                       id="destination"
                       type="date"
                       placeholder="From"
-                      {...register("checkIn")}
+                      {...register("checkIn", {
+                        required: "This is required",
+                      })}
                     />
+                    {errors.checkIn && (
+                      <p className="text-red-900 text-sm mt-1 ml-1">
+                        {errors.checkIn.message}
+                      </p>
+                    )}
                   </label>
                 </div>
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                   <label className="block text-gray text-sm font-medium mb-2">
                     To,
                     <input
@@ -74,8 +90,22 @@ const BookingForm = ({ destinationData }) => {
                       id="destination"
                       type="date"
                       placeholder="To"
-                      {...register("checkOut")}
+                      {...register("checkOut", {
+                        required: "This is required",
+                        validate: (value) => {
+                          const { checkIn } = getValues();
+                          return (
+                            checkIn != value ||
+                            "Checkout and checkIn date can't be same"
+                          );
+                        },
+                      })}
                     />
+                    {errors.checkOut && (
+                      <p className="text-red-900 text-sm mt-1 ml-1">
+                        {errors.checkOut.message}
+                      </p>
+                    )}
                   </label>
                 </div>
               </div>

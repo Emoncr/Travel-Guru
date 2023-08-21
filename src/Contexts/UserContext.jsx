@@ -14,8 +14,15 @@ const UserContext = ({ children }) => {
       payload: { userData },
     });
   };
+
+  const handleSignOut = () => {
+    dispatch({
+      type: "USER_LOGOUT",
+    });
+  };
+
   return (
-    <userLoginContext.Provider value={{ state,addLoginUser }}>
+    <userLoginContext.Provider value={{ state, addLoginUser, handleSignOut }}>
       {children}
     </userLoginContext.Provider>
   );

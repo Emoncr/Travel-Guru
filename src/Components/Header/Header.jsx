@@ -1,21 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Navbar,
   MobileNav,
   Typography,
   Button,
   IconButton,
-  Collapse ,
+  Collapse,
 } from "@material-tailwind/react";
 
 import logo from "../../images/Group 1330.png";
 import logoBlack from "../../images/logo.png";
 import { Link, useLocation } from "react-router-dom";
+import { bookingContext } from "../../Contexts/BookingContext";
+import { userLoginContext } from "../../Contexts/UserContext";
 
 const Header = () => {
   const [openNav, setOpenNav] = React.useState(false);
   const [isRouteChange, setRouteChange] = useState(false);
   const { pathname } = useLocation();
+
+  const {
+    state: {
+      bookingData: { destination },
+    },
+  } = useContext(bookingContext);
+  const { state, handleSignOut } = useContext(userLoginContext);
+
+  const sortDestination = destination
+    ? destination.toLocaleLowerCase().replaceAll(" ", "_")
+    : "not_found";
+
+
 
   useEffect(() => {
     if (pathname != "/") {
@@ -46,13 +61,26 @@ const Header = () => {
         </Typography>
       </Link>
 
-      <Typography
-        as="li"
-        variant="paragraph"
-        className="p-1 font-normal cursor-pointer  font-display"
-      >
-        Destination
-      </Typography>
+      {state.user.email && destination ? (
+        <Link to={`/destination/${sortDestination}`}>
+          <Typography
+            as="li"
+            variant="paragraph"
+            className="p-1 font-normal cursor-pointer  font-display"
+          >
+            Hotel
+          </Typography>
+        </Link>
+      ) : (
+        <Typography
+          as="li"
+          variant="paragraph"
+          className="p-1 font-normal cursor-pointer  font-display"
+        >
+          Destination
+        </Typography>
+      )}
+
       <Typography
         as="li"
         variant="paragraph"
@@ -81,16 +109,28 @@ const Header = () => {
           )}
         </Link>
         <div className="hidden lg:block">{navList}</div>
-        <Link to={"/login"}>
+        {state.user.email ? (
           <Button
+            onClick={handleSignOut}
             color="amber"
             variant="gradient"
             size="md"
             className="hidden lg:inline-block font-display"
           >
-            <span>Login</span>
+            <span>Log Out</span>
           </Button>
-        </Link>
+        ) : (
+          <Link to={"/login"}>
+            <Button
+              color="amber"
+              variant="gradient"
+              size="md"
+              className="hidden lg:inline-block font-display"
+            >
+              <span>Login</span>
+            </Button>
+          </Link>
+        )}
 
         <IconButton
           variant="text"
@@ -135,17 +175,30 @@ const Header = () => {
       <Collapse open={openNav}>
         <div className="container mx-auto">
           {navList}
-          <Link to={"/login"}>
+          {state.user.email ? (
             <Button
+              onClick={handleSignOut}
               color="amber"
               variant="gradient"
               size="sm"
               fullWidth
               className="mb-2 font-display"
             >
-              <span>Login</span>
+              <span>Log Out</span>
             </Button>
-          </Link>
+          ) : (
+            <Link to={"/login"}>
+              <Button
+                color="amber"
+                variant="gradient"
+                size="sm"
+                fullWidth
+                className="mb-2 font-display"
+              >
+                <span>Login</span>
+              </Button>
+            </Link>
+          )}
         </div>
       </Collapse>
     </Navbar>

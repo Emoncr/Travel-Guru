@@ -46,7 +46,7 @@ const rooms = [
     cancel_type:'Cancellation fexibility availiable'
   },
   {
-    room_id: "98765",
+    room_id: "98769",
     room_number: "404",
     room_type: "Standard",
     occupancy: 2,
@@ -64,7 +64,7 @@ const rooms = [
     room_number: "505",
     room_type: "Deluxe",
     occupancy: 3,
-    beds: 2,
+    beds: 3,
     price_per_night: 280.0,
     available: true,
     amenities: ["TV", "WiFi", "Mini bar", "Balcony"],
