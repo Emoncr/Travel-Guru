@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Header/Header";
-import "./Home.css";
+
 import Hero from "../Hero/Hero";
 const Home = () => {
   return (
